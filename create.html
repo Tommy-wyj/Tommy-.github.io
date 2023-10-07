@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>用户注册</title>
+		<style>
+			/* 使用 CSS 居中对齐表单 */
+			body {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				margin: 0;
+			}
+			form {
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="" method="post">
+			<h3>注册账户</h3>
+			用户名：<input type="text" id="username" name="username" required>
+			<br>
+			邮箱：<input type="email" id="email" name="email" required>
+			<br>
+			密码：<input type="password" id="password" name="password" required>
+			<br>
+			<input type="submit" value="注册" onclick="return validateForm()">
+		</form>
+		<p id="message"></p>
+		<script>
+			function validateForm() {
+				var username = document.getElementById("username").value;
+				var email = document.getElementById("email").value;
+				var password = document.getElementById("password").value;
+				var message = document.getElementById("message");
+
+				// 正则表达式检验
+				var usernamePattern = /^[a-zA-Z0-9_-]{3,16}$/;
+				var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+				var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+				if (!usernamePattern.test(username)) {
+					message.textContent = "用户名无效，必须包含3到16个字母、数字、下划线或短划线字符。";
+					return false;
+				}
+
+				if (!emailPattern.test(email)) {
+					message.textContent = "请输入有效的邮箱地址。";
+					return false;
+				}
+
+				if (!passwordPattern.test(password)) {
+					message.textContent = "密码无效，必须包含至少一个数字、一个小写字母、一个大写字母，并且至少8个字符。";
+					return false;
+				}
+			}
+		</script>
+	</body>
+</html>
